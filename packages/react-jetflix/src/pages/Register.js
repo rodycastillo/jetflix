@@ -6,105 +6,37 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@material-ui/core/TextField";
 import { styled } from "@material-ui/core/styles";
+import { RegisterStep2 } from "../components/RegisterStep2";
+import { RegisterStep3 } from "../components/RegisterStep3";
+import { RegisterStep1 } from "../components/RegisterStep1";
 
-const BlackTextField = styled(TextField)({
-  '& label.Mui-focused': {
-    color: 'black',
-  },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: 'black',
-  },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: 'red',
-    },
-    '&:hover fieldset': {
-      borderColor: 'yellow',
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: 'black',
-    },
-  },
-});
+
+
+export const RegisterDetailsContext = React.createContext({});
 
 export const Register = () => {
   const [email, setEmail] = useState("");
-  const validationSchema = yup.object({
-    email: yup
-      .string("Ingrese su correo")
-      .email("Ingrese un correo válido")
-      .required("El correo es obligatorio"),
-    password: yup
-      .string("Ingrese su contraseña")
-      .min(8, "La contraseña debe tener más de 8 carácteres")
-      .required("La contraseña es obligatorio"),
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      password: "",
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
-
-  const getEmail = () => {
-    const e = sessionStorage.getItem("email");
-    if (!e) {
-      return <Navigate to="/" />;
-    }
-    setEmail(JSON.parse(e));
-    document.title = "Jetflix | Registro";
-  };
-  useEffect(() => {
-    getEmail();
-  }, []);
+  const [step, setStep] = useState(1);
+  
+  const initDetails = {
+    email: 'homero@gmial.com',
+    password: 'pass',
+    planSelected: 4,
+  }
+  
+  const [registerDetails, setRegisterDetails] = useState(initDetails); 
+  
   return (
     <div className="h-screen bg-slate-50 relative">
-      <NavbarLogOut />
-      <div
-        className="mt-36 absolute left-0 right-0 mx-auto"
-        style={{ maxWidth: "350px" }}
-      >
-        <strong>PASO 1 DE 3</strong>
-        <h3>
-          ¡Hola de nuevo! <br /> Suscribirte a Jetflix es fácil.
-        </h3>
-        <p>Ingresa tu contraseña para comenzar a ver al instante.</p>
-        <form
-          autoComplete="off"
-          onSubmit={formik.handleSubmit}
-          className="text-yellow-50 mt-8"
-        >
-          <TextField
-            fullWidth
-            id="email"
-            name="email"
-            label="Email"
-            disabled
-            value={email}
-          />
-          <BlackTextField
-            fullWidth
-            id="password"
-            name="password"
-            label="Password"
-            type="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-          />
-          <button
-            type="submit"
-            className=" w-full bg-red-600 p-3 font-medium mt-12"
-          >
-            Siguiente
-          </button>
-        </form>
-      </div>
+      <RegisterDetailsContext.Provider value={{registerDetails,setRegisterDetails}}>
+        <NavbarLogOut />
+        {step === 2 ? 
+        <RegisterStep2 step={step} onSetStep={(step)=> setStep(step)}/>
+        : (step === 3 ?
+          <RegisterStep3 step={step} onSetStep={(step)=> setStep(step)}/>:
+          <RegisterStep1 step={step} onSetStep={(step)=> setStep(step)}/>
+        )}
+      </RegisterDetailsContext.Provider>
     </div>
   );
 };

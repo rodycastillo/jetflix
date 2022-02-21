@@ -198,3 +198,125 @@ footer {
 .footer-region p {
   color: #fff;
 }
+.content-step {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container {
+  border-collapse: collapse;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+}
+
+.table-body {
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+}
+
+.table-row {
+  border-bottom: 1px solid #ccc;
+  min-height: 60px;
+  -webkit-box-align: center;
+  align-items: center;
+  display: flex;
+}
+.feature {
+  padding: 12px 16px;
+  box-sizing: border-box;
+  display: block;
+}
+.feature-title {
+  color: #333;
+  fill: #333;
+  -webkit-box-flex: 0;
+  flex: 0 0 auto;
+  text-align: left;
+  width: 40%;
+}
+.feature-table {
+  font-weight: 700;
+  color: #737373;
+  fill: #737373;
+  box-sizing: border-box;
+  -webkit-box-flex: 1;
+  flex: 1 1 auto;
+  text-align: center;
+  display: block;
+  width: calc(60% / 4);
+}
+
+.plan-header{
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-box-align: end;
+  align-items: flex-end;
+}
+
+.container-selector {
+  width: 60%;
+  display: flex;
+  -webkit-box-pack: center;
+  box-sizing: border-box;
+  border: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .container-selector {
+    width: 100%;
+  }
+  .table-row {
+    flex-wrap: wrap;
+  }
+  .feature-title {
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    padding: 16px 8px 4px;
+    position: relative;
+  }
+  .feature-table {
+    width: calc(100% / 4);
+    font-weight: 700;
+    color: #737373;
+    fill: #737373;
+    min-height: 37px;
+    padding: 8px;
+    position: relative;
+  }
+}
+
+.plan-selector {
+  width: calc(100% / 4);
+  padding: 12px 0;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  position: relative;
+  text-align: center;
+}
+
+.title-selector {
+  padding: 5px;
+  background: #e50914;
+  color: #fff;
+  font-weight: 700;
+  opacity: .6;
+  border-radius: 2px;
+  font-size: 17px;
+  margin: 0 auto;
+}
+.input-selector {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  opacity: 0;
+}

@@ -2,56 +2,7 @@ import React from "react";
 import CardPlan from "./CardPlan";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-
-// images
-import plan1 from "../assets/img/img-plan1.png";
-import plan2 from "../assets/img/img-plan2.png";
-
-const plans = [
-  {
-    id: 1,
-    title: "Standar Edition",
-    description: ["Elden Ring", "Adventure Guide", "Bonus Gesture"],
-    price: 69.99,
-    img: plan1,
-  },
-  {
-    id: 2,
-    title: "Deluxe Edition",
-    description: [
-      "Elden Ring",
-      "Digital Artbook & Original",
-      "Adventure Guide",
-      "Bonus Gesture",
-    ],
-    price: 89.99,
-    img: plan2,
-  },
-  {
-    id: 3,
-    title: "Deluxe Edition",
-    description: [
-      "Elden Ring",
-      "Digital Artbook & Original",
-      "Adventure Guide",
-      "Bonus Gesture",
-    ],
-    price: 89.99,
-    img: plan1,
-  },
-  {
-    id: 4,
-    title: "Deluxe Edition",
-    description: [
-      "Elden Ring",
-      "Digital Artbook & Original",
-      "Adventure Guide",
-      "Bonus Gesture",
-    ],
-    price: 89.99,
-    img: plan2,
-  },
-];
+import listPlans from "./list-plans";
 
 export const Plans = () => {
   return (
@@ -79,7 +30,7 @@ export const Plans = () => {
           },
         }}
       >
-        {plans.map((item, index) => (
+        {listPlans.map((item, index) => (
           <SwiperSlide className="text-center mx-auto" key={index}>
             <CardPlan key={item.title} plan={item} />
           </SwiperSlide>
