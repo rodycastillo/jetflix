@@ -103,7 +103,7 @@ export const RegisterStep1 = (props) => {
                 />
                 <button
                     type="submit"
-                    className="w-full bg-red-600 p-3 font-medium mt-12">
+                    className="w-full bg-red-600 p-3 font-medium mt-12 text-white">
                     Siguiente
                 </button>
             </form>

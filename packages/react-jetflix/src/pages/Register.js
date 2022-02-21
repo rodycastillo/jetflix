@@ -21,7 +21,7 @@ export const Register = () => {
   const initDetails = {
     email: 'homero@gmial.com',
     password: 'pass',
-    planSelected: 4,
+    planSelected: 3,
   }
   
   const [registerDetails, setRegisterDetails] = useState(initDetails); 

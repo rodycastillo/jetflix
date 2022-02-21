@@ -24,7 +24,7 @@ export const TablePlan = () => {
                 { listPlans.map((item,index) => (
 
                     <label 
-                    className="plan-selector" 
+                    className= {`plan-selector ${registerDetails.planSelected == item.id ? "active" : ""}`}
                     key={item.id}
                     for={item.id}>
                         <input type="radio" name="planChoice"
@@ -48,7 +48,7 @@ export const TablePlan = () => {
                     <td className="feature-title feature">Precio</td>
                     { listPlans.map((item,index) => (
                         <td 
-                        className="feature-table feature" 
+                        className={`feature-table feature ${registerDetails.planSelected == item.id ? "active" : ""}`}
                         key={item.id}>
                             {item.price}
                         </td>
@@ -58,7 +58,7 @@ export const TablePlan = () => {
                     <td className="feature-title feature">Calidad</td>
                     { listPlans.map((item,index) => (
                         <td 
-                        className="feature-table feature" 
+                        className={`feature-table feature ${registerDetails.planSelected == item.id ? "active" : ""}`}
                         key={item.id}>
                             {item.quality}
                         </td>
@@ -68,7 +68,7 @@ export const TablePlan = () => {
                     <td className="feature-title feature">Resolución</td>
                     { listPlans.map((item,index) => (
                         <td 
-                        className="feature-table feature" 
+                        className={`feature-table feature ${registerDetails.planSelected == item.id ? "active" : ""}`}
                         key={item.id}>
                             {item.resolution}
                         </td>
