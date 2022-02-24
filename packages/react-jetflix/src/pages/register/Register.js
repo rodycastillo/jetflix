@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { NavbarLogOut } from "../components/NavbarLogOut";
+import { NavbarLogOut } from "../../components/NavbarLogOut";
 
-import { useFormik } from "formik";
-import * as yup from "yup";
-import TextField from "@material-ui/core/TextField";
-import { styled } from "@material-ui/core/styles";
-import { RegisterStep2 } from "../components/RegisterStep2";
-import { RegisterStep3 } from "../components/RegisterStep3";
-import { RegisterStep1 } from "../components/RegisterStep1";
+// import { useFormik } from "formik";
+// import * as yup from "yup";
+// import TextField from "@material-ui/core/TextField";
+// import { styled } from "@material-ui/core/styles";
+import { RegisterStep2 } from "../../components/RegisterStep2";
+import { RegisterStep3 } from "../../components/RegisterStep3";
+import { RegisterStep1 } from "../../components/RegisterStep1";
 
 
 

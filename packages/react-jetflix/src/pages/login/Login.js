@@ -1,5 +1,5 @@
 import React from "react";
-import { NavbarLogOut } from "../components/NavbarLogOut";
+import { NavbarLogOut } from "../../components/NavbarLogOut";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from '@material-ui/core/TextField';
@@ -37,7 +37,6 @@ const WhiteTextField = styled(TextField)({
 });
 
 export const Login = () => {
-
   const validationSchema = yup.object({
     email: yup
       .string('Enter your email')
@@ -55,8 +54,11 @@ export const Login = () => {
       password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (values, { setSubmitting }, history) => {
+      setTimeout(() => {
+        setSubmitting(false)
+        console.log(JSON.stringify(values, null, 2));
+      }, 10);
     },
   });
   document.title="Jetflix | Login"
