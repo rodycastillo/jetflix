@@ -39,8 +39,6 @@ const WhiteTextField = styled(TextField)({
 });
 
 export const Login = () => {
-
-  console.log(process.env.BASE_URL)
   const { dispatch } = useContext(AuthContext)
 
   const validationSchema = yup.object({

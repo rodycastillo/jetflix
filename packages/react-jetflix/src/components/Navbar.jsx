@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../auth/AuthContext";
+import { logout } from "../auth/AuthActions";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -15,7 +17,8 @@ const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ");
 };
 
-export const Navbar = () => {
+const Navbar = () => {
+  const { dispatch } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -25,8 +28,11 @@ export const Navbar = () => {
     console.log(searchTerm);
     setSearchTerm("");
   };
+  const LogOut = () => {
+    return dispatch(logout());
+  };
   return (
-    <Disclosure as="nav" className="bg-zinc-900 border-4 border-b-stone-500">
+    <Disclosure as="nav" className="bg-zinc-900">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -46,7 +52,7 @@ export const Navbar = () => {
                 <div className="flex-shrink-0 flex items-center">
                   <Link
                     to="/"
-                    className="no-underline text-4xl font-semibold text-red-600"
+                    className="no-underline text-4xl font-semibold text-cyan-600"
                   >
                     Jetflix
                   </Link>
@@ -68,7 +74,7 @@ export const Navbar = () => {
                         {item.name}
                       </a>
                     ))}
-                    <div className="flex items-center justify-center">
+                    {/* <div className="flex items-center justify-center">
                       <form
                         onSubmit={handleSearch}
                         className="flex border-2 rounded-xl bg-white"
@@ -93,8 +99,8 @@ export const Navbar = () => {
                             <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
                           </svg>
                         </button>
-                      </form>
-                    </div>
+                      </form> 
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -121,7 +127,7 @@ export const Navbar = () => {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
+                      {/* <Menu.Item>
                         {({ active }) => (
                           <a
                             href="#"
@@ -133,8 +139,8 @@ export const Navbar = () => {
                             Your Profile
                           </a>
                         )}
-                      </Menu.Item>
-                      <Menu.Item>
+                      </Menu.Item> */}
+                      {/* <Menu.Item>
                         {({ active }) => (
                           <a
                             href="#"
@@ -146,11 +152,11 @@ export const Navbar = () => {
                             Settings
                           </a>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> */}
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            onClick={LogOut}
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
@@ -192,3 +198,5 @@ export const Navbar = () => {
     </Disclosure>
   );
 };
+
+export default Navbar;
