@@ -46,7 +46,7 @@ export const Navbar = () => {
                 <div className="flex-shrink-0 flex items-center">
                   <Link
                     to="/"
-                    className="text-slate-100 no-underline text-4xl font-semibold text-red-600"
+                    className="no-underline text-4xl font-semibold text-red-600"
                   >
                     Jetflix
                   </Link>

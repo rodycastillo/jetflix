@@ -31,7 +31,7 @@ export const RegisterStep2 = (props) => {
         <button
           onClick={() => nextStep()}
           type="submit"
-          className="w-full bg-red-600 p-3 font-medium mt-12 text-white"
+          className="w-full bg-cyan-600 p-3 font-medium mt-12 text-white"
         >
           Siguiente
         </button>
