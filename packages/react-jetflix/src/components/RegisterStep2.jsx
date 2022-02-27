@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import CardPlan from "./CardPlan";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import listPlans from "./list-plans";
-import { Navigation } from "swiper";
 import { TablePlan } from "./TablePlan";
 import { RegisterDetailsContext } from "../pages/register/Register";
 

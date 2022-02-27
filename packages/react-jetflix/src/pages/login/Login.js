@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavbarLogOut } from "../../components/NavbarLogOut";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from '@material-ui/core/TextField';
 import { styled } from "@material-ui/core/styles";
+import { AuthContext } from "../../auth/AuthContext";
+import {login} from "../../auth/ApiCalls";
 
 
 const WhiteTextField = styled(TextField)({
   '& label.Mui-focused': {
-    color: 'white',
+    color: '#ffa00a',
   },
   '& .MuiInput-underline': {
     color:'white',
@@ -31,12 +33,16 @@ const WhiteTextField = styled(TextField)({
       borderColor: 'yellow',
     },
     '&.Mui-focused fieldset': {
-      borderColor: 'white',
+      borderColor: '#ffa00a',
     },
   },
 });
 
 export const Login = () => {
+
+  console.log(process.env.BASE_URL)
+  const { dispatch } = useContext(AuthContext)
+
   const validationSchema = yup.object({
     email: yup
       .string('Enter your email')
@@ -44,7 +50,7 @@ export const Login = () => {
       .required('Email is required'),
     password: yup
       .string('Enter your password')
-      .min(8, 'Password should be of minimum 8 characters length')
+      .min(4, 'Password should be of minimum 8 characters length')
       .required('Password is required'),
   });
 
@@ -54,9 +60,10 @@ export const Login = () => {
       password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values, { setSubmitting }, history) => {
+    onSubmit: (values) => {
       setTimeout(() => {
-        setSubmitting(false)
+        const { email, password } = values
+        login({email, password}, dispatch)
         console.log(JSON.stringify(values, null, 2));
       }, 10);
     },
@@ -93,7 +100,7 @@ export const Login = () => {
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
         />
-        <button type="submit" className=" w-full bg-red-600 p-3 font-medium rounded-md mt-12">
+        <button type="submit" className=" w-full bg-cyan-600 p-3 font-medium rounded-md mt-12">
           Submit
         </button>
       </form>

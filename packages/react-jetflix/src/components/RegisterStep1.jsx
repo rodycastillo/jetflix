@@ -11,6 +11,7 @@ import * as yup from "yup";
 import TextField from "@material-ui/core/TextField";
 import { styled } from "@material-ui/core/styles";
 import { RegisterDetailsContext } from "../pages/register/Register";
+import { Redirect } from "react-router-dom";
 
 const BlackTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -56,7 +57,7 @@ export const RegisterStep1 = (props) => {
   const getEmail = () => {
     const e = sessionStorage.getItem("email");
     if (!e) {
-      return <Navigate to="/" />;
+      return <Redirect to="/" />;
     }
     setRegisterDetails((prev) => ({
       ...prev,

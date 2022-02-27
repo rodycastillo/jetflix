@@ -30,7 +30,7 @@ export const NavbarLogOut = () => {
                 <div className="flex-shrink-0 flex items-center">
                   <Link
                     to="/"
-                    className="text-slate-100 no-underline text-5xl font-bold text-red-600"
+                    className="no-underline text-5xl font-bold text-cyan-600"
                   >
                     Jetflix
                   </Link>
@@ -41,7 +41,7 @@ export const NavbarLogOut = () => {
                       <></>
                     ) : (
                       <Link to="/login">
-                        <button className="bg-red-600 active:bg-red-600 h-full px-3 mt-2 py-2 text-slate-200 rounded-md">
+                        <button className="bg-cyan-600 active:bg-cyan-600 h-full px-3 mt-2 py-2 text-slate-200 rounded-md">
                           Iniciar Sesión
                         </button>
                       </Link>
@@ -61,7 +61,7 @@ export const NavbarLogOut = () => {
                   <></>
                 ) : (
                   <Link to="/login">
-                    <button className="bg-red-600 active:bg-red-600 h-full px-3 py-2 text-slate-200 rounded-md">
+                    <button className="bg-cyan-600 active:bg-cyan-600 h-full px-3 py-2 text-slate-200 rounded-md">
                       Iniciar Sesión
                     </button>
                   </Link>
