@@ -20,8 +20,8 @@ export const RegisterStep3 = (props) => {
   };
 
   const register = async () => {
-    // e.preventDefault();
     const data = { username, email, planSelected, password };
+    console.log(data);
     try {
       await axios.post("http://localhost:2005/api/auth/register", data);
       history.push("/login");
