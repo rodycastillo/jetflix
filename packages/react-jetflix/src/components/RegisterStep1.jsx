@@ -38,6 +38,9 @@ export const RegisterStep1 = (props) => {
     RegisterDetailsContext
   );
   const validationSchema = yup.object({
+    username: yup
+      .string("Ingrese su nombre")
+      .required("El nombre es obligatorio"),
     password: yup
       .string("Ingrese su contraseña")
       .min(8, "La contraseña debe tener más de 8 carácteres")
@@ -46,10 +49,14 @@ export const RegisterStep1 = (props) => {
 
   const formik = useFormik({
     initialValues: {
+      username: "",
       password: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      const { username, password } = values;
+      const { email } = registerDetails;
+      setRegisterDetails({ username, email, password });
       props.onSetStep(props.step + 1);
     },
   });
@@ -79,7 +86,7 @@ export const RegisterStep1 = (props) => {
       <h3>
         ¡Hola de nuevo! <br /> Suscribirte a Jetflix es fácil.
       </h3>
-      <p>Ingresa tu contraseña para comenzar a ver al instante.</p>
+      <p>Ingresa tu nombre y contraseña para comenzar a ver al instante.</p>
       <form
         autoComplete="off"
         onSubmit={formik.handleSubmit}
@@ -92,6 +99,16 @@ export const RegisterStep1 = (props) => {
           label="Email"
           disabled
           value={registerDetails.email}
+        />
+        <TextField
+          fullWidth
+          id="username"
+          name="username"
+          label="Name"
+          value={formik.values.username}
+          onChange={formik.handleChange}
+          error={formik.touched.username && Boolean(formik.errors.username)}
+          helperText={formik.touched.username && formik.errors.username}
         />
         <BlackTextField
           fullWidth

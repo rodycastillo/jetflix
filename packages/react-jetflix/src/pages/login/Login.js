@@ -43,13 +43,13 @@ export const Login = () => {
 
   const validationSchema = yup.object({
     email: yup
-      .string('Enter your email')
-      .email('Enter a valid email')
-      .required('Email is required'),
+      .string('Ingrese su email')
+      .email('Ingrese un email correcto')
+      .required('El email es requerido'),
     password: yup
-      .string('Enter your password')
-      .min(4, 'Password should be of minimum 8 characters length')
-      .required('Password is required'),
+      .string('Ingrese su  password')
+      .min(4, 'El password debería tener como mínimo 8 caracteres')
+      .required('El password es requerido'),
   });
 
   const formik = useFormik({
@@ -62,7 +62,6 @@ export const Login = () => {
       setTimeout(() => {
         const { email, password } = values
         login({email, password}, dispatch)
-        console.log(JSON.stringify(values, null, 2));
       }, 10);
     },
   });

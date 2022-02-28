@@ -14,11 +14,6 @@ export const AppRouter = () => {
   const { user } = useContext(AuthContext);
   return (
     <>
-      {/* <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes> */}
       <Router>
         <Switch>
           <Route exact path="/">

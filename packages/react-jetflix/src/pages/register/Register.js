@@ -26,7 +26,8 @@ export const Register = () => {
 
   const initDetails = {
     email: "",
-    password: "pass",
+    password: "",
+    username: "",
     planSelected: 3,
   };
 
@@ -38,10 +39,6 @@ export const Register = () => {
       .required("Email es requerido"),
   });
 
-  const ToRegister = () => {
-    console.log("Log of Register");
-  };
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -50,8 +47,7 @@ export const Register = () => {
     onSubmit: (values) => {
       setRegisterDetails({ ...registerDetails, email: values.email });
       sessionStorage.setItem("email", JSON.stringify(values.email));
-      ToRegister();
-      setShowRegister(true);
+      setShowRegister(!showRegister);
     },
   });
 

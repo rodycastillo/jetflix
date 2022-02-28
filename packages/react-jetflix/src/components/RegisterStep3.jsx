@@ -1,19 +1,33 @@
+import axios from "axios";
 import React, { useContext } from "react";
-import CardPlan from "./CardPlan";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useHistory } from "react-router-dom";
+// import CardPlan from "./CardPlan";
+// import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import listPlans from "./list-plans";
-import { Navigation } from "swiper";
-import { TablePlan } from "./TablePlan";
+// import listPlans from "./list-plans";
+// import { Navigation } from "swiper";
+// import { TablePlan } from "./TablePlan";
 import { RegisterDetailsContext } from "../pages/register/Register";
 
 export const RegisterStep3 = (props) => {
   const { registerDetails, setRegisterDetails } = useContext(
     RegisterDetailsContext
   );
-
+  const { username, email, planSelected, password } = registerDetails;
+  const history = useHistory();
   const previousStep = () => {
     props.onSetStep(props.step - 1);
+  };
+
+  const register = async () => {
+    // e.preventDefault();
+    const data = { username, email, planSelected, password };
+    try {
+      await axios.post("http://localhost:2005/api/auth/register", data);
+      history.push("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="content-step">
@@ -23,10 +37,16 @@ export const RegisterStep3 = (props) => {
       >
         <strong>PASO 3 DE 3</strong>
         <h3>
-          Pagar por el plan: {registerDetails.planSelected} <br />
+          Pagar por el plan: {planSelected} <br />
         </h3>
+        <div className=" mt-2">Detalles de la compra:</div>
+        <ul className="mb-2">
+          <li>Nombre: {username}</li>
+          <li>Correo: {email}</li>
+          <li>Plan: </li>
+        </ul>
         <p>
-          Puedes
+          Puedes{" "}
           <u onClick={() => previousStep()} style={{ cursor: "pointer" }}>
             cambiar el plan
           </u>{" "}
@@ -57,7 +77,7 @@ export const RegisterStep3 = (props) => {
                   id="c-number"
                   className="input-field card-number"
                   placeholder="XXXX XXXX XXXX XXXX"
-                  maxlength="16"
+                  maxLength="16"
                   required
                 />
               </div>
@@ -124,7 +144,7 @@ export const RegisterStep3 = (props) => {
                   className="input-field cvv-code"
                   id="cvv-code"
                   placeholder="000"
-                  maxlength="3"
+                  maxLength="3"
                   required
                 />
               </div>
@@ -137,9 +157,9 @@ export const RegisterStep3 = (props) => {
           </div>
         </div>
         <button
-          onClick={() => nextStep()}
+          onClick={() => register()}
           type="submit"
-          className="w-full bg-red-600 p-3 font-medium mt-12 text-white"
+          className="w-full bg-cyan-600 p-3 font-medium mt-12 text-white"
         >
           Pagar
         </button>

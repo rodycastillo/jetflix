@@ -1,12 +1,9 @@
-import React, { useContext } from "react";
-import { logout } from "../../auth/AuthActions";
+import React from "react";
 import { AuthContext } from "../../auth/AuthContext";
-// import { Navbar } from "../components/Navbar";
 import { Footer } from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 
 export const Home = () => {
-  const { dispatch } = useContext(AuthContext);
   return (
     <>
       <Navbar />
