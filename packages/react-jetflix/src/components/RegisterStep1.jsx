@@ -56,7 +56,11 @@ export const RegisterStep1 = (props) => {
     onSubmit: (values) => {
       const { username, password } = values;
       const { email } = registerDetails;
-      setRegisterDetails({ username, email, password });
+      setRegisterDetails((prev) => ({
+        ...prev,
+        username: username,
+        password: password,
+      }));
       props.onSetStep(props.step + 1);
     },
   });
@@ -76,7 +80,6 @@ export const RegisterStep1 = (props) => {
   useEffect(() => {
     getEmail();
   }, []);
-
   return (
     <div
       className="mt-36 absolute left-0 right-0 mx-auto"

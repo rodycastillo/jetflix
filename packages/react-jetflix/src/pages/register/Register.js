@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import { RegisterStep2 } from "../../components/RegisterStep2";
 import { RegisterStep3 } from "../../components/RegisterStep3";
 import { RegisterStep1 } from "../../components/RegisterStep1";
+import listPlans from "../../components/list-plans";
 
 export const RegisterDetailsContext = React.createContext({});
 
@@ -28,7 +29,7 @@ export const Register = () => {
     email: "",
     password: "",
     username: "",
-    planSelected: 3,
+    planSelected: listPlans.filter((obj) => obj.id == 3)[0],
   };
 
   const [registerDetails, setRegisterDetails] = useState(initDetails);

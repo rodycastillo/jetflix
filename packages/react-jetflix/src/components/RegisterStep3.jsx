@@ -21,7 +21,6 @@ export const RegisterStep3 = (props) => {
 
   const register = async () => {
     const data = { username, email, planSelected, password };
-    console.log(data);
     try {
       await axios.post("http://localhost:2005/api/auth/register", data);
       history.push("/login");
@@ -36,14 +35,11 @@ export const RegisterStep3 = (props) => {
         style={{ maxWidth: "350px" }}
       >
         <strong>PASO 3 DE 3</strong>
-        <h3>
-          Pagar por el plan: {planSelected} <br />
-        </h3>
         <div className=" mt-2">Detalles de la compra:</div>
         <ul className="mb-2">
           <li>Nombre: {username}</li>
           <li>Correo: {email}</li>
-          <li>Plan: </li>
+          <li>Plan: {planSelected.title} </li>
         </ul>
         <p>
           Puedes{" "}

@@ -14,7 +14,7 @@ export const TablePlan = () => {
   const onChangeValue = (event) => {
     setRegisterDetails((prev) => ({
       ...prev,
-      planSelected: event.target.value,
+      planSelected: event.target,
     }));
   };
 
@@ -25,7 +25,7 @@ export const TablePlan = () => {
           {listPlans.map((item, index) => (
             <label
               className={`plan-selector ${
-                registerDetails.planSelected == item.id ? "active" : ""
+                registerDetails.planSelected.id == item.id ? "active" : ""
               }`}
               key={item.id}
               for={item.id}
@@ -52,7 +52,7 @@ export const TablePlan = () => {
             {listPlans.map((item, index) => (
               <td
                 className={`feature-table feature ${
-                  registerDetails.planSelected == item.id ? "active" : ""
+                  registerDetails.planSelected.id == item.id ? "active" : ""
                 }`}
                 key={item.id}
               >
@@ -65,7 +65,7 @@ export const TablePlan = () => {
             {listPlans.map((item, index) => (
               <td
                 className={`feature-table feature ${
-                  registerDetails.planSelected == item.id ? "active" : ""
+                  registerDetails.planSelected.id == item.id ? "active" : ""
                 }`}
                 key={item.id}
               >
@@ -78,7 +78,7 @@ export const TablePlan = () => {
             {listPlans.map((item, index) => (
               <td
                 className={`feature-table feature ${
-                  registerDetails.planSelected == item.id ? "active" : ""
+                  registerDetails.planSelected.id == item.id ? "active" : ""
                 }`}
                 key={item.id}
               >
