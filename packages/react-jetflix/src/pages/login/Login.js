@@ -43,13 +43,13 @@ export const Login = () => {
 
   const validationSchema = yup.object({
     email: yup
-      .string('Ingrese su email')
-      .email('Ingrese un email correcto')
-      .required('El email es requerido'),
+      .string('Ingrese su correo electronico')
+      .email('Ingrese un correo electronico correcto')
+      .required('El correo electronico es requerido'),
     password: yup
-      .string('Ingrese su  password')
-      .min(4, 'El password debería tener como mínimo 8 caracteres')
-      .required('El password es requerido'),
+      .string('Ingrese su  contraseña')
+      .min(4, 'La contraseña debería tener como mínimo 8 caracteres')
+      .required('La contraseña es requerida'),
   });
 
   const formik = useFormik({
@@ -100,6 +100,10 @@ export const Login = () => {
         <button type="submit" className=" w-full bg-cyan-600 p-3 font-medium rounded-md mt-12">
           Submit
         </button>
+        <p className="mt-2 text-center">No tiene cuenta? 
+          <a href="register"><u> Regístrese ahora!</u>
+          </a>
+        </p>
       </form>
     </div>
   );

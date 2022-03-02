@@ -64,7 +64,7 @@ export const RegisterStep3 = (props) => {
               </div>
 
               <div className="card-number-wrap">
-                <label className="input-title" for="c-number">
+                <label className="input-title" >
                   Card Number*
                 </label>
                 <input
@@ -79,7 +79,7 @@ export const RegisterStep3 = (props) => {
               </div>
 
               <div className="cardholder-name-wrap">
-                <label for="c-name" className="input-title cardholder-name">
+                <label className="input-title cardholder-name">
                   Name on card*
                 </label>
                 <input
@@ -132,7 +132,7 @@ export const RegisterStep3 = (props) => {
             <div className="card back">
               <div className="black-stripe"></div>
               <div className="cvv-wrap">
-                <label for="cvv-code" className="input-title">
+                <label className="input-title">
                   CVV Code*
                 </label>
                 <input

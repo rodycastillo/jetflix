@@ -2,13 +2,22 @@ import React, { useEffect, useState } from "react";
 import { NavbarLogOut } from "../../components/NavbarLogOut";
 
 import "./register.scss";
+
 import { useFormik } from "formik";
-import * as yup from "yup";
+import { useHistory } from "react-router-dom";
+
 import TextField from "@material-ui/core/TextField";
 import { RegisterStep2 } from "../../components/RegisterStep2";
 import { RegisterStep3 } from "../../components/RegisterStep3";
 import { RegisterStep1 } from "../../components/RegisterStep1";
+
 import listPlans from "../../components/list-plans";
+
+import Swal from 'sweetalert2'
+import * as yup from "yup";
+import axios from "axios";
+import withReactContent from 'sweetalert2-react-content';
+
 
 export const RegisterDetailsContext = React.createContext({});
 
@@ -24,6 +33,7 @@ const insideStyles = {
 export const Register = () => {
   const [showRegister, setShowRegister] = useState(false);
   const [step, setStep] = useState(1);
+  const history = useHistory();
 
   const initDetails = {
     email: "",
@@ -33,6 +43,7 @@ export const Register = () => {
   };
 
   const [registerDetails, setRegisterDetails] = useState(initDetails);
+
   const validationSchema = yup.object({
     email: yup
       .string("Ingrese su email")
@@ -45,12 +56,47 @@ export const Register = () => {
       email: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      setRegisterDetails({ ...registerDetails, email: values.email });
-      sessionStorage.setItem("email", JSON.stringify(values.email));
-      setShowRegister(!showRegister);
+    onSubmit: async (values) => {
+      const response = await verifyEmail(values.email)
+      if ( response.data.status ){
+        const SweetAlert = withReactContent(Swal);
+        SweetAlert.fire({
+          icon: 'info',
+          title: 'Correo registrado',
+          showCancelButton: true,
+          cancelButtonText: 'Cancelar',
+          confirmButtonText: 'Iniciar Sesión'
+        }).then((response)=> {
+          if( response.isConfirmed ) {
+            history.push("/login");
+          }
+        })
+      } else {
+        setRegisterDetails({ 
+          ...registerDetails, 
+          email: values.email });
+        sessionStorage.setItem("email", JSON.stringify(values.email));
+        setShowRegister(!showRegister);
+      }
+      
     },
   });
+
+
+
+  const verifyEmail = async (email) => {
+    try {
+      return await axios.get("http://localhost:2005/api/auth/verify", {
+        params:{
+          email:email
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
 
   return (
     <>

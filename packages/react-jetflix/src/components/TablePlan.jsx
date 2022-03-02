@@ -28,7 +28,6 @@ export const TablePlan = () => {
                 registerDetails.planSelected.id == item.id ? "active" : ""
               }`}
               key={item.id}
-              for={item.id}
             >
               <input
                 type="radio"
