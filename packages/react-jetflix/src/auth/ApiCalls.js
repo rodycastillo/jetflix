@@ -10,3 +10,12 @@ export const login = async (user, dispatch) => {
     dispatch(loginFailure());
   }
 };
+
+export const verifyEmail = async (email) => {
+  const data = { email };
+  try {
+    return await axios.post("http://localhost:2005/api/auth/verify", data);
+  } catch (error) {
+    console.log(error);
+  }
+};

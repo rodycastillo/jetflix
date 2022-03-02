@@ -11,12 +11,15 @@ import { RegisterStep2 } from "../../components/RegisterStep2";
 import { RegisterStep3 } from "../../components/RegisterStep3";
 import { RegisterStep1 } from "../../components/RegisterStep1";
 
+import { verifyEmail } from "../../auth/ApiCalls";
+
 import listPlans from "../../components/list-plans";
 
 import Swal from 'sweetalert2'
 import * as yup from "yup";
 import axios from "axios";
 import withReactContent from 'sweetalert2-react-content';
+
 
 
 export const RegisterDetailsContext = React.createContext({});
@@ -81,20 +84,6 @@ export const Register = () => {
       
     },
   });
-
-
-
-  const verifyEmail = async (email) => {
-    try {
-      return await axios.get("http://localhost:2005/api/auth/verify", {
-        params:{
-          email:email
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
 
 
