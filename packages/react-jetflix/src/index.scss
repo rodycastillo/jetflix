@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'node_modules/react-modal-video/scss/modal-video.scss';
 
 body {
   margin: 0;
@@ -33,6 +34,13 @@ code {
   width: 100%;
 }
 
+.container-cards {
+  .swiper-slide{
+    background-color: transparent;
+  }
+  padding-top: 2rem !important;
+}
+
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -43,18 +51,48 @@ code {
   flex-direction: column;
   align-items: center;
   margin-right: 25px;
-
+  transition: transform 300ms ease 100ms;
+  .play-button {
+    display: none;
+  }
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transform:scale(1.2);
+    .play-button {
+      transition: transform 300ms ease 100ms;
+      display: flex;
+      justify-content: center;
+      z-index: 5;
+      .absolute {
+        top:40%
+      }
+    }
+    .card-wave {
+      z-index: 1;
+      background-size: 15000%;
+      opacity: 50%;
+      transition: .2s background-size linear;
+    }
   }
   &-body {
     padding-top: 10px;
     padding-left: 5px;
     width: 100%;
   }
+  &-wave {
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    font-family: inherit;
+    outline: inherit;
+    justify-content: center;
+  }
   &-img {
     border-radius: 5px 5px 0 0;
-    width: 100%;
+    width: 100% !important;
+    
   }
   &-container {
     border-radius: 20px;
@@ -166,11 +204,11 @@ code {
 }
 /* FOOTER */
 footer {
-  padding: 4rem 1.5rem;
+  padding: 3rem 1.5rem;
 }
 .footer {
   &-contain {
-    height: 30vh;
+    height: 15vh;
     display: flex;
     justify-content: space-between;
   }
@@ -323,4 +361,155 @@ footer {
   opacity: 0;
 }
 
+.header-navbar {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+}
 
+.header {
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  vertical-align: middle;
+}
+
+
+.video-header {
+  width: 100%;
+  top: 0;
+  height: 600px;
+  object-fit: cover;
+  object-position: center;
+  transition: .3s transform,.3s border-radius,.3s padding;
+  margin: 0;
+}
+
+.info-header {
+  width: 25rem;
+  left: 0;
+  bottom: 0;
+  top:0;
+  display: flex!important;
+  align-items: center;
+  border-radius: inherit;
+  float: none;
+}
+
+.left-shadow {
+  background-color: transparent!important;
+  box-shadow: none!important;
+  background-image: linear-gradient(to right,#000,transparent)!important;
+}
+
+.large {
+  min-height: 3rem!important;
+  height: 3rem;
+}
+.border {
+  border: 0.5rem solid var(--color-1);
+  background-color: transparent;
+  color: var(--color-1);
+  box-shadow: none;
+}
+.buttons-header {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.container-videos {
+  display: flex;
+  padding: 0 55px;
+  
+  &:hover .item-video{
+      transform: translateX(-25%);
+  }
+}
+
+.item-video {
+  background: green;
+  flex: 0 0 19.7%;
+  text-align: center;
+  margin: 0 2px;
+  transition: transform 300ms ease 100ms;
+  &:hover {
+    transform: scale(1.5) !important;
+    ~.item-video{
+      transform: translateX(25%);
+    }
+  }
+  
+}
+
+.item-content {
+  margin-top: 40px;
+  height: 300px;
+  position: relative;
+}
+
+.item-background {
+  display: flex;
+  height: 100%;
+}
+
+.item-left {
+  background: black;
+  width: 30%;
+  position: relative;
+}
+
+.item-left:before {
+  content: '';
+  position: absolute;
+  background-image: linear-gradient(to right,#000,transparent);
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 275px;
+}
+
+.item-right {
+  background: green;
+  width: 70%;
+}
+
+.item-content-container {
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 30px
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 25%;
+  height: 100%;
+  object-fit: cover;
+}
