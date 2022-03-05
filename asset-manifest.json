@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/jetflix/static/css/main.04cb32ba.css",
+    "main.js": "/jetflix/static/js/main.b0b45647.js",
+    "static/media/img-plan2.png": "/jetflix/static/media/img-plan2.f4c36440cc6bc24b2891.png",
+    "static/media/img-plan1.png": "/jetflix/static/media/img-plan1.811afffd2d2cfc01535b.png",
+    "index.html": "/jetflix/index.html",
+    "main.04cb32ba.css.map": "/jetflix/static/css/main.04cb32ba.css.map",
+    "main.b0b45647.js.map": "/jetflix/static/js/main.b0b45647.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.04cb32ba.css",
+    "static/js/main.b0b45647.js"
+  ]
+}
