@@ -19,6 +19,17 @@ export const RegisterStep3 = (props) => {
     props.onSetStep(props.step - 1);
   };
 
+  const componentDidMount = () => {
+    const script = document.createElement("script");
+    script.src = "https://sdk.mercadopago.com/js/v2";
+    script.async = true;
+    document.body.appendChild(script);
+  }
+
+  const payCard = () => {
+    console.log()
+  }
+
   const register = async () => {
     const data = { username, email, planSelected, password };
     try {
@@ -153,7 +164,7 @@ export const RegisterStep3 = (props) => {
           </div>
         </div>
         <button
-          onClick={() => register()}
+          onClick={() => payCard()}
           type="submit"
           className="w-full bg-cyan-600 p-3 font-medium mt-12 text-white"
         >

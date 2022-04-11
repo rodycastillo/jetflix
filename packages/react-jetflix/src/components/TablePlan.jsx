@@ -14,7 +14,7 @@ export const TablePlan = () => {
   const onChangeValue = (event) => {
     setRegisterDetails((prev) => ({
       ...prev,
-      planSelected: event.target,
+      planSelected: listPlans.filter((obj) => obj.id == parseInt(event.target.defaultValue))[0],
     }));
   };
 

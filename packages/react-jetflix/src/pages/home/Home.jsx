@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, Component } from "react";
 import { AuthContext } from "../../auth/AuthContext";
 import { Footer } from "../../components/Footer";
 import Navbar from "../../components/Navbar";
+import { HomeAdmin } from "../../components/HomeAdmin";
 
 import { faHome,faCircleInfo,faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +13,7 @@ import { Navigation } from "swiper";
 import ReactPlayer from 'react-player'
 import { Modal } from "react-responsive-modal";
 import ModalVideo from 'react-modal-video'
+
 
 export const Home = () => {
   const [open, setOpen] = useState(false)
@@ -32,9 +34,13 @@ export const Home = () => {
     movies.push(movie)
   }
 
+  const adminLog = JSON.parse(localStorage.getItem('user')).isAdmin;
+
   
   return (
     <>
+      { adminLog ? (<HomeAdmin />):
+      <>
       <div className="header-navbar">
         <Navbar  />
       </div>
@@ -71,7 +77,7 @@ export const Home = () => {
         </div>
       </div>
       <div>
-        <h5 className="font-bold text-white p-3">Conitnuar viendo..</h5>
+        <h5 className="font-bold text-white p-3">Continuar viendo..</h5>
         <Swiper 
           className="container-cards"
           breakpoints={{
@@ -264,6 +270,7 @@ export const Home = () => {
         
       </div>
       <Footer />
+      </>}
     </>
   );
 };
