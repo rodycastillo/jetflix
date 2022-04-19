@@ -9,6 +9,7 @@ import { Home } from "../pages/home/Home";
 import { Login } from "../pages/login/Login";
 import { Register } from "../pages/register/Register";
 import { AuthContext } from "../auth/AuthContext";
+import { Watch } from "@material-ui/icons";
 
 export const AppRouter = () => {
   const { user } = useContext(AuthContext);
@@ -23,6 +24,13 @@ export const AppRouter = () => {
             {!user ? <Register /> : <Redirect to="/" />}
           </Route>
           <Route path="/login">{!user ? <Login /> : <Redirect to="/" />}</Route>
+          {user && (
+            <>
+              <Route path="/watch/:id">
+                <Watch />
+              </Route>
+            </>
+          )}
         </Switch>
       </Router>
     </>
