@@ -15,7 +15,7 @@ import { Modal } from "react-responsive-modal";
 import ModalVideo from 'react-modal-video'
 
 
-export const Home = () => {
+export const Home = (props) => {
   const [open, setOpen] = useState(false)
 
   const movie = {
@@ -35,11 +35,11 @@ export const Home = () => {
   }
 
   const adminLog = JSON.parse(localStorage.getItem('user')).isAdmin;
-
+  const typeFormat = props.typeFormat;
   
   return (
     <>
-      { adminLog ? (<HomeAdmin />):
+      { adminLog ? (<HomeAdmin typeFormat={typeFormat} />):
       <>
       <div className="header-navbar">
         <Navbar  />

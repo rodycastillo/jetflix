@@ -17,12 +17,18 @@ export const AppRouter = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            {user ? <Home /> : <Redirect to="/register" />}
+            {user ? <Home typeFormat={''} /> : <Redirect to="/register" />}
+          </Route>
+          <Route exact path="/add-movie">
+            {user ? <Home typeFormat={'movie'} /> : <Redirect to="/register" />}
+          </Route>
+          <Route exact path="/add-serie">
+            {user ? <Home typeFormat={'serie'} /> : <Redirect to="/register" />}
           </Route>
           <Route path="/register">
             {!user ? <Register /> : <Redirect to="/" />}
           </Route>
-          <Route path="/login">{!user ? <Login /> : <Redirect to="/" />}</Route>
+          <Route path="/login">{!user ? <Login /> : user.isAdmin ? <Redirect to="/add-movie" /> : <Redirect to="/" /> }</Route>
         </Switch>
       </Router>
     </>

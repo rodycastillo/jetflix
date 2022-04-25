@@ -1,11 +1,11 @@
 import { Box, Button, FilledInput, FormControl, FormHelperText, Grid, IconButton, Input, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField } from "@material-ui/core";
 import React, { useState } from "react";
-import Navbar from "./Navbar";
+import NavbarAdmin from "./NavbarAdmin";
 
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-export const HomeAdmin = () => {
+export const HomeAdmin = (props) => {
 
     const validationSchema = yup.object({
         title: yup
@@ -31,22 +31,30 @@ export const HomeAdmin = () => {
         onSubmit: (values) => {
             console.log(values)
         },
-      });
+    });
+
+    let typeStringFormat = ''
+    if ( props.typeFormat == 'movie') {
+        typeStringFormat = ' Pelicula';
+    } else { 
+        typeStringFormat = ' Serie';
+    }
+    
     return (
         <>
         <div className="header-navbar">
-            <Navbar  />
+            <NavbarAdmin typeFormat={props.typeFormat} />
         </div>
         <Grid container spacing={2} className="view-admin">
-            <Grid item xs={6} md={3}></Grid>
-            <Grid item xs={6} md={6}>
+            <Grid item xs={2} md={3}></Grid>
+            <Grid item xs={8} md={6}>
                 <h1 className="text-white text-center text-4xl font-semibold">Vista Admin</h1>
                 <Box sx={{ display: 'flex', flexDirection: 'column', 
                 border: '1px dashed grey' , backgroundColor: 'white',
                 margin: '5px', padding: '10px' }}>
                     <form autoComplete="off"
                          onSubmit={formik.handleSubmit}>
-                        <h1 className="text-center font-bold">Ingresar pelicula</h1>
+                        <h1 className="text-center font-bold">Ingresar {typeStringFormat}</h1>
                         <div className="pt-3">
                             <TextField
                                 label="Titulo"
@@ -146,14 +154,16 @@ export const HomeAdmin = () => {
                                 />
                             </Button>
                         </div>
-                        <button type="submit" 
-                        className="h-11 px-4 bg-cyan-600 text-center">
-                            Subir pelicula
-                        </button>
+                        <div className="pt-3 pb-3 text-center">
+                            <button type="submit" 
+                            className="h-11 px-4 bg-cyan-600 text-center text-white">
+                                Subir pelicula
+                            </button>
+                        </div>
                     </form>
                 </Box>
             </Grid>
-            <Grid item xs={6} md={3}></Grid>
+            <Grid item xs={2} md={3}></Grid>
         </Grid>
         
         </>

@@ -5,7 +5,7 @@ import * as yup from "yup";
 import TextField from '@material-ui/core/TextField';
 import { styled } from "@material-ui/core/styles";
 import { AuthContext } from "../../auth/AuthContext";
-import {login} from "../../auth/ApiCalls";
+import { login } from "../../auth/ApiCalls";
 
 
 const WhiteTextField = styled(TextField)({
