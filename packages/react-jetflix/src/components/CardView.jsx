@@ -1,24 +1,47 @@
 import React, { useState } from "react";
-import ModalVideo from "react-modal-video";
-import {
-  faHome,
-  faCircleInfo,
-  faPlay,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTimesCircle, faPlay } from "@fortawesome/free-solid-svg-icons";
+import ReactModal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 export const CardView = ({ item }) => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <ModalVideo
-        channel="youtube"
-        autoplay
-        isOpen={open}
-        videoId="L61p2uyiMSo"
-        onClose={() => setOpen(false)}
-      />
-      <div className="card m-2" onClick={() => setOpen(true)}>
+      <ReactModal
+        isOpen={isOpen}
+        ariaHideApp={false}
+        style={{
+          content: {
+            width: "30rem",
+            height: "30%",
+            margin: "auto",
+            borderRadius: "30px",
+          },
+          overlay: {
+            backgroundColor: "#fffbfbc2",
+            // opacity: "0.2",
+            zIndex: "20",
+          },
+        }}
+      >
+        <div className="flex flex-col justify-between align-middle h-full">
+          <button onClick={() => setIsOpen(false)} className=" text-right">
+            {" "}
+            <FontAwesomeIcon icon={faTimesCircle} />
+          </button>
+          <div className="text-center">
+            <h2 className="text-black font-semibold text-lg">{item.title}</h2>
+            <p>{item.desc}</p>
+          </div>
+          <Link to={`/watch/${item._id}`} className="text-center">
+            <button className=" bg-cyan-600 text-white p-2 rounded-md">
+              Ver la pelicula
+            </button>
+          </Link>
+        </div>
+      </ReactModal>
+      <div className="card m-2" onClick={() => setIsOpen(true)}>
         <a className="card-wave">
           <img className="card-img pt-3" src={item.img} alt="image"></img>
         </a>

@@ -1,26 +1,16 @@
-import React, { useEffect, useRef, useState, Component } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthContext } from "../../auth/AuthContext";
 import { Footer } from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import { HomeAdmin } from "../../components/HomeAdmin";
-
-import {
-  faHome,
-  faCircleInfo,
-  faPlay,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
-
-import ReactPlayer from "react-player";
-import { Modal } from "react-responsive-modal";
-import ModalVideo from "react-modal-video";
 import { ListCards } from "../../components/ListCards";
+import axios from "axios";
 
 export const Home = () => {
-  const [open, setOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState();
+  const [movies, setMovies] = useState([]);
 
   const movie = {
     _id: "620749097554ff3e21e1a340",
@@ -36,29 +26,29 @@ export const Home = () => {
     year: "2021",
     limit: 16,
   };
-  const movies = [];
-  for (let i = 1; i <= 15; i++) {
-    movies.push(movie);
-  }
+  // const movies = [];
+  // for (let i = 1; i <= 15; i++) {
+  //   movies.push(movie);
+  // }
 
-  const adminLog = JSON.parse(localStorage.getItem("user")).isAdmin;
-
+  useEffect(async () => {
+    const adminLog = JSON.parse(localStorage.getItem("user"));
+    if (adminLog) {
+      setIsAdmin(adminLog.isAdmin);
+    }
+    const BASE_URL = process.env.REACT_APP_BACKEND_URL;
+    const { data } = await axios.get(`${BASE_URL}movies`);
+    console.log(data);
+  }, []);
   return (
     <>
-      {adminLog ? (
+      {isAdmin ? (
         <HomeAdmin />
       ) : (
         <>
           <div className="header-navbar">
             <Navbar />
           </div>
-          <ModalVideo
-            channel="youtube"
-            autoplay
-            isOpen={open}
-            videoId="L61p2uyiMSo"
-            onClose={() => setOpen(false)}
-          />
           <div className="header">
             <video autoPlay loop muted className="video-header">
               <source
@@ -93,7 +83,7 @@ export const Home = () => {
           <ListCards title={"Populares en Jetflix"} />
           <ListCards title={"Tendencias"} />
           <ListCards title={"Series Premiadas"} />
-          <div>
+          {/* <div>
             <h5 className="font-bold text-white p-3">Series Premiadas</h5>
             <Swiper
               className="container-cards"
@@ -143,7 +133,7 @@ export const Home = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
+          </div>*/}
           <Footer />
         </>
       )}

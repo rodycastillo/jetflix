@@ -15,12 +15,10 @@ import { verifyEmail } from "../../auth/ApiCalls";
 
 import listPlans from "../../components/list-plans";
 
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import * as yup from "yup";
 import axios from "axios";
-import withReactContent from 'sweetalert2-react-content';
-
-
+import withReactContent from "sweetalert2-react-content";
 
 export const RegisterDetailsContext = React.createContext({});
 
@@ -60,32 +58,30 @@ export const Register = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      const response = await verifyEmail(values.email)
-      if ( response.data.status ){
+      const response = await verifyEmail(values.email);
+      if (response.data.status) {
         const SweetAlert = withReactContent(Swal);
         SweetAlert.fire({
-          icon: 'info',
-          title: 'Correo registrado',
+          icon: "info",
+          title: "Correo registrado",
           showCancelButton: true,
-          cancelButtonText: 'Cancelar',
-          confirmButtonText: 'Iniciar Sesión'
-        }).then((response)=> {
-          if( response.isConfirmed ) {
+          cancelButtonText: "Cancelar",
+          confirmButtonText: "Iniciar Sesión",
+        }).then((response) => {
+          if (response.isConfirmed) {
             history.push("/login");
           }
-        })
+        });
       } else {
-        setRegisterDetails({ 
-          ...registerDetails, 
-          email: values.email });
+        setRegisterDetails({
+          ...registerDetails,
+          email: values.email,
+        });
         sessionStorage.setItem("email", JSON.stringify(values.email));
         setShowRegister(!showRegister);
       }
-      
     },
   });
-
-
 
   return (
     <>

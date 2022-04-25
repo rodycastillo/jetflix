@@ -4,6 +4,7 @@ import { CardView } from "./CardView";
 
 export const ListCards = ({ title }) => {
   const movie = {
+    _id: "620749097554ff3e21e1a340",
     title: "Superman",
     desc: "test Desc",
     img: "https://media.revistagq.com/photos/6050e0cc267aa4eef01d2e77/4:3/w_1124,h_843,c_limit/henry-cavill-entrenamiento-superman.jpeg",
