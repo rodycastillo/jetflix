@@ -9,7 +9,7 @@ import { Home } from "../pages/home/Home";
 import { Login } from "../pages/login/Login";
 import { Register } from "../pages/register/Register";
 import { AuthContext } from "../auth/AuthContext";
-import { Watch } from "@material-ui/icons";
+import { Watch } from "../pages/watch/Watch";
 
 export const AppRouter = () => {
   const { user } = useContext(AuthContext);
