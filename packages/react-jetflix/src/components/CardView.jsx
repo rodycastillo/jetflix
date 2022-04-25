@@ -13,8 +13,8 @@ export const CardView = ({ item }) => {
         ariaHideApp={false}
         style={{
           content: {
-            width: "30rem",
-            height: "30%",
+            width: "25rem",
+            height: "12rem",
             margin: "auto",
             borderRadius: "30px",
           },
