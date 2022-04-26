@@ -15,6 +15,7 @@ export default function useMercadoPago(amount) {
         "MercadoPago"
     );
 
+
     useEffect(() => {
         if (MercadoPago) {
             const mp = new MercadoPago(PUBLIC_KEY_MP);
@@ -82,11 +83,12 @@ export default function useMercadoPago(amount) {
                     onFetching: (resource) => {
                         // Animate progress bar
                         const progressBar =
-                            document.querySelector(".progress-bar");
-                        progressBar.removeAttribute("value");
+                            document.querySelector(".form-checkout__submit");
+                        //progressBar.removeAttribute("value");
 
                         return () => {
-                            progressBar.setAttribute("value", "0");
+                            
+                            //progressBar.setAttribute("value", "0");
                         };
                     },
                 },

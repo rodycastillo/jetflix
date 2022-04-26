@@ -22,8 +22,8 @@ export const AppRouter = () => {
           <Route exact path="/add-movie">
             {user ? <Home typeFormat={'movie'} /> : <Redirect to="/register" />}
           </Route>
-          <Route exact path="/add-serie">
-            {user ? <Home typeFormat={'serie'} /> : <Redirect to="/register" />}
+          <Route exact path="/edit-movie">
+            {user ? <Home typeFormat={'edit'} /> : <Redirect to="/register" />}
           </Route>
           <Route path="/register">
             {!user ? <Register /> : <Redirect to="/" />}

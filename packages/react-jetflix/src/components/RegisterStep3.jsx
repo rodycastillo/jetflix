@@ -11,6 +11,8 @@ import useMercadoPago from "../hooks/useMercadoPago";
 import { RegisterDetailsContext } from "../pages/register/Register";
 import Card from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
+import Swal from 'sweetalert2'
+import withReactContent from "sweetalert2-react-content";
 
 const initial_state_card = {
   cvc: "",
@@ -39,7 +41,16 @@ export const RegisterStep3 = (props) => {
     const data = { username, email, planSelected, password };
     try {
       await axios.post("http://localhost:2005/api/auth/register", data);
-      history.push("/login");
+      const SweetAlert = withReactContent(Swal);
+      SweetAlert.fire({
+        icon: 'success',
+        title: 'Pago realizado',
+        confirmButtonText: 'Iniciar Sesión'
+        }).then((response)=> {
+          if( response.isConfirmed ) {
+            history.push("/login");
+          }
+      })
     } catch (error) {
       console.log(error);
     }
@@ -47,6 +58,7 @@ export const RegisterStep3 = (props) => {
 
   
   const [state, setState] = useState(initial_state_card);
+
   const resultPayment = useMercadoPago(planSelected.price);
 
   const handleInputChange = (e) => {
@@ -63,6 +75,7 @@ export const RegisterStep3 = (props) => {
   if (resultPayment){
     if ( 'status' in resultPayment){
       if (resultPayment.status=='approved') {
+        
         register();
       }
     }
@@ -91,14 +104,14 @@ export const RegisterStep3 = (props) => {
       </div>
       <div className="px-2 sm:px-6 sm:mx-8 lg:px-8 my-16">
         <div className="container-credit-card container">
-            <Card
+           {/*<Card
                 cvc={state.cvc}
                 expiry={state.cardExpirationMonth + state.cardExpirationYear}
                 name={state.cardholderName}
                 number={state.cardNumber}
                 focused={state.focus}
                 brand={state.issuer}
-            />
+            />*/}
 
             <form id="form-checkout" className="credit-card-form">
                 <div className="form-control">
@@ -152,7 +165,6 @@ export const RegisterStep3 = (props) => {
                     <select
                         name="issuer"
                         id="form-checkout__issuer"
-                        on
                     ></select>
                     <select
                         name="identificationType"

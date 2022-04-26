@@ -8,7 +8,7 @@ import { logout } from "../auth/AuthActions";
 
 const navigation = [
   { name: "Agregar Pelicula", href: "/add-movie", current: true },
-  { name: "Agregar Serie", href: "/add-serie", current: false },
+  { name: "Editar peliculas", href: "/edit-movie", current: false },
 ];
 
 const classNames = (...classes) => {
@@ -31,9 +31,11 @@ const NavbarAdmin = (props) => {
   };
 
   if ( props.typeFormat == 'movie') {
-        navigation[0].current = true;
-  } else { 
-        navigation[1].current = true;
+    navigation[0].current = true;
+    navigation[1].current = false;
+  } else {
+    navigation[0].current = false;
+    navigation[1].current = true;
   }
     
   return (
