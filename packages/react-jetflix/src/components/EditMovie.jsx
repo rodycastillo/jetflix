@@ -1,13 +1,41 @@
-import { Box, Button, FilledInput, FormControl, FormHelperText, Grid, IconButton, Input, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField } from "@material-ui/core";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, FormControl, Grid, InputLabel, MenuItem, Modal, Select, TextField, Typography } from "@material-ui/core";
 import React, { useState } from "react";
-import NavbarAdmin from "./NavbarAdmin";
 
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { EditMovie } from "./EditMovie";
 
-export const HomeAdmin = (props) => {
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
+
+export const EditMovie = () => {
+    const [open, setOpen] = React.useState(false);
+    const movieSelected = {
+        title:"Superman",
+        description:"test Desc",
+        img:"https://media.revistagq.com/photos/6050e0cc267aa4eef01d2e77/4:3/w_1124,h_843,c_limit/henry-cavill-entrenamiento-superman.jpeg",
+        imgTitle:"Superman",
+        imgSm:"https://media.revistagq.com/photos/6050e0cc267aa4eef01d2e77/4:3/w_112,h_84,c_limit/henry-cavill-entrenamiento-superman.jpeg",
+        trailer:"https://www.youtube.com/embed/T6DJcgm3wNY",
+        video:"https://player.vimeo.com/video/52311932?h=50a5dac067&color=ff0179&byline=0&portrait=0&badge=0",
+        year:"2021",
+        limit:16,
+        genre: 10,
+      }
+    const movies = [];
+    for (let i = 1 ; i <= 15 ; i++) {
+        movies.push(movieSelected)
+    }
     const validationSchema = yup.object({
         title: yup
           .string("Ingrese el titulo"),
@@ -22,7 +50,7 @@ export const HomeAdmin = (props) => {
 
     const formik = useFormik({
         initialValues: {
-          title: "",
+          title: "cgh",
           description:"",
           year: "",
           limit: 0,
@@ -34,27 +62,26 @@ export const HomeAdmin = (props) => {
         },
     });
 
-    let validEditMovie = true;
-    if ( props.typeFormat == 'movie') {
-        validEditMovie = false;
+    const handleOpenModal = (movie) => {
+        console.log(movie);
+        formik.initialValues = movie;
+        setOpen(true);
     }
+
+    const handleClose = () => setOpen(false);
     
     return (
         <>
-        <div className="header-navbar">
-            <NavbarAdmin typeFormat={props.typeFormat} />
-        </div>
-        { validEditMovie ? (<EditMovie />):
-        <Grid container spacing={2} className="view-admin">
-            <Grid item xs={2} md={3}></Grid>
-            <Grid item xs={8} md={6}>
-                <h1 className="text-white text-center text-4xl font-semibold">Vista Admin</h1>
-                <Box sx={{ display: 'flex', flexDirection: 'column', 
-                border: '1px dashed grey' , backgroundColor: 'white',
-                margin: '5px', padding: '10px' }}>
+        <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            >
+            <Box sx={style}>
                     <form autoComplete="off"
                          onSubmit={formik.handleSubmit}>
-                        <h1 className="text-center font-bold">Ingresar Pelicula</h1>
+                        <h1 className="text-center font-bold">Editar Pelicula</h1>
                         <div className="pt-3">
                             <TextField
                                 label="Titulo"
@@ -157,14 +184,57 @@ export const HomeAdmin = (props) => {
                         <div className="pt-3 pb-3 text-center">
                             <button type="submit" 
                             className="h-11 px-4 bg-cyan-600 text-center text-white">
-                                Subir pelicula
+                                Editar pelicula
                             </button>
                         </div>
                     </form>
                 </Box>
-            </Grid>
-            <Grid item xs={2} md={3}></Grid>
-        </Grid>}
+        </Modal>
+        <Grid container spacing={2} className="view-admin">
+            <div style={{ width: '100%' }}>
+                <h1 className="text-white text-center text-4xl font-semibold">
+                    Vista Admin
+                </h1>
+                <Box
+                    display="flex"
+                    flexWrap="wrap"
+                    p={1}
+                    m={1}
+                >
+                {movies.map((item, index) => (
+                    <Box
+                        p={1}
+                        m={1}
+                        key={index}
+                        sx={{maxWidth: 275}}
+                    >
+                        <Card key={index}>
+                            <CardMedia
+                                component="img"
+                                height="194"
+                                image={item.img}
+                                alt={item.imgTitle}
+                            />
+                            <CardContent>
+                                <Typography variant="h5" component="div">
+                                    {item.title}
+                                </Typography>
+                                <Typography variant="body2">
+                                    {item.description}
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small" 
+                                onClick={()=>handleOpenModal(item)}>
+                                    Editar
+                                </Button>
+                            </CardActions>
+                        </Card>
+                    </Box>
+                ))}
+                </Box>
+            </div>
+        </Grid>
         </>
     );
 };
