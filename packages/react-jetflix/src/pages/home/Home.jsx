@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../../auth/AuthContext";
 import { Footer } from "../../components/Footer";
 import Navbar from "../../components/Navbar";
@@ -6,43 +6,12 @@ import { HomeAdmin } from "../../components/HomeAdmin";
 import { faCircleInfo, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ListCards } from "../../components/ListCards";
-import axios from "axios";
 
 export const Home = () => {
-  const [isAdmin, setIsAdmin] = useState();
-  const [movies, setMovies] = useState([]);
-
-  const movie = {
-    _id: "620749097554ff3e21e1a340",
-    title: "Superman",
-    desc: "test Desc",
-    img: "https://media.revistagq.com/photos/6050e0cc267aa4eef01d2e77/4:3/w_1124,h_843,c_limit/henry-cavill-entrenamiento-superman.jpeg",
-    imgTitle: "Superman",
-    imgSm:
-      "https://media.revistagq.com/photos/6050e0cc267aa4eef01d2e77/4:3/w_112,h_84,c_limit/henry-cavill-entrenamiento-superman.jpeg",
-    trailer: "https://www.youtube.com/embed/T6DJcgm3wNY",
-    video:
-      "https://player.vimeo.com/video/52311932?h=50a5dac067&color=ff0179&byline=0&portrait=0&badge=0",
-    year: "2021",
-    limit: 16,
-  };
-  // const movies = [];
-  // for (let i = 1; i <= 15; i++) {
-  //   movies.push(movie);
-  // }
-
-  useEffect(async () => {
-    const adminLog = JSON.parse(localStorage.getItem("user"));
-    if (adminLog) {
-      setIsAdmin(adminLog.isAdmin);
-    }
-    const BASE_URL = process.env.REACT_APP_BACKEND_URL;
-    const { data } = await axios.get(`${BASE_URL}movies`);
-    console.log(data);
-  }, []);
+  const { user } = useContext(AuthContext);
   return (
     <>
-      {isAdmin ? (
+      {user.isAdmin ? (
         <HomeAdmin />
       ) : (
         <>

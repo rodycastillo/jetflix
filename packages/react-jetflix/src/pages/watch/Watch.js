@@ -10,7 +10,7 @@ export const Watch = () => {
   useEffect(async () => {
     const { accessToken } = JSON.parse(localStorage.getItem("user"));
     const BASE_URL = process.env.REACT_APP_BACKEND_URL;
-    const { data } = await axios.get(`${BASE_URL}movies/${id}`, {
+    const { data } = await axios.get(`${BASE_URL}/movies/${id}`, {
       headers: {
         token: `Bearer ${accessToken}`,
       },
