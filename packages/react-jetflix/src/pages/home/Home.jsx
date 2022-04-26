@@ -7,12 +7,12 @@ import { faCircleInfo, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ListCards } from "../../components/ListCards";
 
-export const Home = () => {
+export const Home = ({ typeFormat }) => {
   const { user } = useContext(AuthContext);
   return (
     <>
       {user.isAdmin ? (
-        <HomeAdmin />
+        <HomeAdmin typeFormat={typeFormat} />
       ) : (
         <>
           <div className="header-navbar">
