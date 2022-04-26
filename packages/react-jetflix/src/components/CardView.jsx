@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { faTimesCircle, faPlay } from "@fortawesome/free-solid-svg-icons";
 import ReactModal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -45,6 +46,28 @@ export const CardView = ({ item }) => {
         </div>
       </ReactModal>
       <div className="card m-2" onClick={() => setIsOpen(true)}>
+=======
+import ModalVideo from "react-modal-video";
+import {
+  faHome,
+  faCircleInfo,
+  faPlay,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+export const CardView = ({ item }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <ModalVideo
+        channel="youtube"
+        autoplay
+        isOpen={open}
+        videoId="L61p2uyiMSo"
+        onClose={() => setOpen(false)}
+      />
+      <div className="card m-2" onClick={() => setOpen(true)}>
+>>>>>>> 665bd59100ca5325d27469b9edab8a006460e512
         <a className="card-wave">
           <img className="card-img pt-3" src={item.img} alt="image"></img>
         </a>
